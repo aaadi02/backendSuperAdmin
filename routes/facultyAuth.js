@@ -4,18 +4,6 @@ import jwt  from "jsonwebtoken";
 import Faculty  from"../models/Faculty.js";
 import router from express.Router();
 
-// Create faculty
-// router.post('/', async (req, res) => {
-//   try {
-//     const { firstfirstname, type, employmentStatus, employeeId, password } = req.body;
-//     const faculty = new Faculty({ firstname, type, employmentStatus, employeeId, password });
-//     await faculty.save();
-//     res.status(201).json(faculty);
-//   } catch (err) {
-//     res.status(400).json({ error: err.message });
-//   }
-// });
-
 router.post("/", async (req, res) => {
   try {
     const { firstname, type, employmentStatus, employeeId, password } =
@@ -133,6 +121,5 @@ router.post("/rolelogin", async (req, res) => {
   }
 });
 
-module.exports = router;
 
 export default router;
