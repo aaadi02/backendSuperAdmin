@@ -1,7 +1,6 @@
 import express from "express";
 import Student from "../models/StudentManagement.js";
 import Semester from "../models/Semester.js";
-// import Subject from "../models/subject.js";
 import PDFDocument from "pdfkit";
 import { createWriteStream } from "fs";
 import { join } from "path";

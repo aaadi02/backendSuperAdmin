@@ -1,22 +1,34 @@
-import express from "express";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import Faculty from "../models/Faculty.js";
-
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const Faculty = require("../models/Faculty");
 const router = express.Router();
+
+// Create faculty
+// router.post('/', async (req, res) => {
+//   try {
+//     const { firstfirstname, type, employmentStatus, employeeId, password } = req.body;
+//     const faculty = new Faculty({ firstname, type, employmentStatus, employeeId, password });
+//     await faculty.save();
+//     res.status(201).json(faculty);
+//   } catch (err) {
+//     res.status(400).json({ error: err.message });
+//   }
+// });
 
 router.post("/", async (req, res) => {
   try {
-    const { name, role, employmentStatus, username, password } = req.body;
+    const { firstname, type, employmentStatus, employeeId, password } =
+      req.body;
 
     // Hash the password using bcrypt before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const faculty = new Faculty({
-      name,
-      role,
+      firstname,
+      type,
       employmentStatus,
-      username,
+      employeeId,
       password: hashedPassword,
     });
 
@@ -30,7 +42,7 @@ router.post("/", async (req, res) => {
 // Get all faculty
 router.get("/", async (req, res) => {
   try {
-    const faculties = await Faculty.find();
+    const faculties = await Faculty.find(); // Fetch all faculties
 
     if (faculties.length === 0) {
       return res.status(404).json({
@@ -81,13 +93,13 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Faculty Login (Role-based, only Permanent Employee allowed)
+// Faculty Login (type-based, only Permanent Employee allowed)
 router.post("/rolelogin", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { employeeId, password } = req.body;
 
-    // Find faculty by username
-    const faculty = await Faculty.findOne({ username });
+    // Find faculty by employeeId
+    const faculty = await Faculty.findOne({ employeeId });
 
     if (!faculty) {
       return res.status(404).json({ error: "Faculty not found" });
@@ -109,7 +121,7 @@ router.post("/rolelogin", async (req, res) => {
 
     // Create a JWT token
     const token = jwt.sign(
-      { id: faculty._id, role: faculty.role },
+      { id: faculty._id, type: faculty.type },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
@@ -121,4 +133,4 @@ router.post("/rolelogin", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
