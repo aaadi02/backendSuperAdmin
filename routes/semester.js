@@ -1,6 +1,6 @@
 import express from "express";
 import Semester from "../models/Semester.js";
-import Subject from "../models/subject.js";
+import Subject from "../models/Subject.js";
 import Student from "../models/StudentManagement.js";
 
 const router = express.Router();
