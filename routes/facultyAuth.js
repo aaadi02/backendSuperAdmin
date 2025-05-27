@@ -1,8 +1,8 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const Faculty = require("../models/Faculty");
-const router = express.Router();
+import express from "express";
+import bcrypt from "bcrypt";
+import jwt  from "jsonwebtoken";
+import Faculty  from"../models/Faculty.js";
+import router from express.Router();
 
 // Create faculty
 // router.post('/', async (req, res) => {
@@ -132,5 +132,7 @@ router.post("/rolelogin", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+module.exports = router;
 
 export default router;
