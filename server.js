@@ -22,7 +22,7 @@ import eventRoutes from "./routes/event.js";
 import facultyRoutes from "./routes/faculty.js";
 import facultyAuthRoutes from "./routes/facultyAuth.js";
 import semesterRoutes from "./routes/semester.js";
-import streamRoutes from "./routes/stream.js";
+import streamRoutes from "./routes/Stream.js";
 import studentManagementRoutes from "./routes/StudentManagement.js";
 
 // Use routes
