@@ -212,7 +212,7 @@ router.get("/", async (req, res) => {
 // READ Single Student
 router.get("/:id", async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id)
+    const student = await Student.findById({ studentId: req.params.id })
       .populate("stream")
       .populate("department")
       .populate({
